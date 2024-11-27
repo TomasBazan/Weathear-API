@@ -16,3 +16,10 @@ Make sure to handle errors properly. If the 3rd party API is down, or if the cit
 Use some package or module to make HTTP requests e.g. if you are using Node.js, you can use the axios package, if you are using Python, you can use the requests module.
 Implement rate limiting to prevent abuse of your API. You can use a package like express-rate-limit if you are using Node.js or flask-limiter if you are using Python.
 This project will help you understand how to work with 3rd party APIs, caching, and environment variables. It will also help you understand how to structure your API and how to handle requests.
+
+
+# TODO
+- [x] Arreglar bug de key: El problema era con el os, no leia bien el .env, se ve que en el desarrollo algo hizo que funcione
+- [] Cambiar grados a Celcius: primero deberia tomar los datos que quiero mostrar en la respuesta al usuario y agregar esos campos a la query para que solo traiga esos. Luego podria hacer una fun lambda para que se fije si cada elemento de respuesta de la api esta en un set que contiene temperatura y le aplico la formula de F a ((grados Fahrenheit − 32) × 5/9.)
+- [x] Agregar error Handling
+- [] Agregar cache
