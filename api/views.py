@@ -1,8 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+import requests
 from .utils import check_response_for_errors
 from .constants import WEATHER_API_KEY, WEATHER_API_URL
-import requests
 
 
 @api_view(['GET'])
@@ -10,9 +12,10 @@ def get_weather_next_15_days(request: Response,
                              country_code: str,
                              city: str
                              ) -> Response:
+
     r = requests.get(f'{WEATHER_API_URL}{city},{country_code}?key={
-                        WEATHER_API_KEY}',
-                     timeout=10)
+        WEATHER_API_KEY}',
+        timeout=10)
     return check_response_for_errors(r)
 
 
