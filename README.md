@@ -1,25 +1,33 @@
-# Wethear-API
-In this project, instead of relying on our own weather data, we will build a weather API that fetches and returns weather data from a 3rd party API. This project will help you understand how to work with 3rd party APIs, caching, and environment variables.
+## Description
+This is a personal project to learn how to use cache and redis, the idea is to ask to a third party API for the information and store the responses from the Third party API to reproduce the situation where I would like to reduce latency and possibles costs.
 
-As for the actual weather API to use, you can use your favorite one, as a suggestion, here is a link to Visual Crossing’s API, it’s completely FREE and easy to use.
+## Requirements
+- Python 3.12.3+
+- Pip 24.0
+- Docker version 27.3.1
+- docker-compose version 1.29.2
 
-Regarding the in-memory cache, a pretty common recommendation is to use Redis, you can read more about it here, and as a recommendation, you could use the city code entered by the user as the key, and save there the result from calling the API.
+## Usage
+- Clone repository
+```bash
+git clone 
+```
+- Activate the environment
+```bash
+source venv/bin/activate
+```
+- Execute redis image
+```bash
+docker-compose up -d
+```
+- run executable
+```bash
+python manage.py runserver
+```
 
-At the same time, when you “set” the value in the cache, you can also give it an expiration time in seconds (using the EX flag on the SET command). That way the cache (the keys) will automatically clean itself when the data is old enough (for example, giving it a 12-hours expiration time).
-
-Some Tips
-Here are some tips to help you get started:
-
-Start by creating a simple API that returns a hardcoded weather response. This will help you understand how to structure your API and how to handle requests.
-Use environment variables to store the API key and the Redis connection string. This way, you can easily change them without having to modify your code.
-Make sure to handle errors properly. If the 3rd party API is down, or if the city code is invalid, make sure to return the appropriate error message.
-Use some package or module to make HTTP requests e.g. if you are using Node.js, you can use the axios package, if you are using Python, you can use the requests module.
-Implement rate limiting to prevent abuse of your API. You can use a package like express-rate-limit if you are using Node.js or flask-limiter if you are using Python.
-This project will help you understand how to work with 3rd party APIs, caching, and environment variables. It will also help you understand how to structure your API and how to handle requests.
-
-
-# TODO
-- [x] Arreglar bug de key: El problema era con el os, no leia bien el .env, se ve que en el desarrollo algo hizo que funcione
-- [] Cambiar grados a Celcius: primero deberia tomar los datos que quiero mostrar en la respuesta al usuario y agregar esos campos a la query para que solo traiga esos. Luego podria hacer una fun lambda para que se fije si cada elemento de respuesta de la api esta en un set que contiene temperatura y le aplico la formula de F a ((grados Fahrenheit − 32) × 5/9.)
-- [x] Agregar error Handling
-- [] Agregar cache
+## Query accepted
+home-page/weather/<parameters>
+where parameters can take differents shapes:
+- If you want to check the next two weeks you can use <parameters> as Country-Code/City-Name
+- If you want to check a specific range of days you can use <parameters> as Country-Code/City-Name/YYYY-MM-DD/YYY-MM-DD (where the first date correspond to the start and the second one to the end)
+- If you want to check for a specific hour you can use <parameters> as Country-Code/City-Name/YYY-MM-DD/HH:MM:SS (the hour must be in the 24 hours format)
