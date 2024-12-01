@@ -8,6 +8,7 @@ from .constants import WEATHER_API_KEY, WEATHER_API_URL
 
 
 @api_view(['GET'])
+@cache_page(60 * 10)
 def get_weather_next_15_days(request: Response,
                              country_code: str,
                              city: str
@@ -20,6 +21,7 @@ def get_weather_next_15_days(request: Response,
 
 
 @api_view(['GET'])
+@cache_page(60 * 10)
 def get_weather_in_range(request: Response,
                          country_code: str,
                          city: str,
@@ -35,6 +37,7 @@ def get_weather_in_range(request: Response,
 
 
 @api_view(['GET'])
+@cache_page(60 * 10)
 def get_weather_day_and_hour(request: requests.models.Response,
                              country_code: str,
                              city: str,
